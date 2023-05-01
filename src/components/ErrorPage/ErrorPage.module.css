@@ -1,0 +1,10 @@
+.errorDiv{
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 150px;
+}
+.imgError{
+    width: 500px;
+    display: block;
+    margin: 0 auto;
+}

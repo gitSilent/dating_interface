@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import ErrorPage from './components/ErrorPage/ErrorPage';
-import AuthorizationPage from './AuthorizationPage/AuthorizationPage';
-import RegistrationPage from './RegistrationPage/RegistrationPage';
-import MainPage from './MainPage/MainPage';
+import AuthorizationPage from './components/AuthorizationPage/AuthorizationPage';
+import RegistrationPage from './components/RegistrationPage/RegistrationPage';
+import MainPage from './components/MainPage/MainPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import './fonts/Inter/Inter-Regular.otf'
 const router = createBrowserRouter([
   {
     path: "/",

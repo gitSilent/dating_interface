@@ -1,0 +1,31 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;1,200&display=swap'); */
+@font-face {
+    font-family: "InterRegular";
+    src: local("InterRegular"),
+    url("./fonts/Inter/Inter-Regular.otf") format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "InterBold";
+    src: local("InterBold"),
+    url("./fonts/Inter/Inter-Bold.otf") format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "InterSemiBold";
+    src: local("InterSemiBold"),
+    url("./fonts/Inter/Inter-SemiBold.otf") format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "InterMedium";
+    src: local("InterMedium"),
+    url("./fonts/Inter/Inter-Medium.otf") format("truetype");
+    font-weight: normal;
+}
+body{
+    font-family: "InterMedium" ;
+}
