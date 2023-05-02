@@ -1,3 +1,23 @@
-.authorizationPage{
-    
+/* .authorizationPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+} */
+/* .telNumber{
+    padding: 50px;
+} */
+
+h2 {
+    font-family:Inter;
+    font-size: 48px;
 }
+
+
+.authorizationPage .form .linkReg {
+        color: #2f00ff;
+        cursor: pointer;
+}
+
+
