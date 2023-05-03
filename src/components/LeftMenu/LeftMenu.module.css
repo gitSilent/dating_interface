@@ -1,0 +1,47 @@
+.leftMenu{
+    background-color: #5E5E5E;
+    width: 331px;
+    position: absolute;
+    height: 100%;
+}
+
+.menuSandwich_img{
+    position: absolute;
+    margin-top: 26px;
+    margin-left: 25px;
+}
+
+.menuSandwich_img:hover{
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.userProfile{
+    display: flex;
+    flex-direction: column;
+    font-family: 'InterRegular';
+    margin: 0 auto;
+    width: fit-content;
+    align-items: center;
+    font-size: 32px;
+    margin-top: 73px;
+    margin-bottom: 97px;
+}
+.profilePhoto{
+    border-radius: 50%;
+    width: 157px;
+}
+.selectList_div{
+    font-size: 32px;
+    /* display: flex;
+    flex-direction: column; */
+}
+.selectList_div ul li{
+    margin-bottom: 65px;
+}
+.liLink{
+    color: white;
+    text-decoration: none;
+    margin-left: 49px;
+}

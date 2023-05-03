@@ -2,8 +2,12 @@ import React from 'react'
 import styles from './RegistrationPage.module.css'
 import { Box } from '@mui/material'
 import {TextField, Button, Typography} from '@mui/material'
-
+import sha256 from 'sha256'
 export default function RegistrationPage() {
+  
+  function getHash(){
+    console.log();
+  }
   return (
     <div className={styles.registrationPage}>
       <div className='form'>
