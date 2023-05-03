@@ -9,15 +9,14 @@
     padding: 50px;
 } */
 
-h2 {
-    font-family:Inter;
+.authorizationPage h2 {
+    font-family:"InterSemiBold";
     font-size: 48px;
 }
 
 
-.authorizationPage .form .linkReg {
-        color: #2f00ff;
-        cursor: pointer;
+.linkReg{
+    color: black;
 }
 
 
