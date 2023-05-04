@@ -10,7 +10,7 @@ export default function RegistrationPage() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [gender, setGender] = useState("Мужской");
+  const [gender, setGender] = useState("");
   const [city, setCity] = useState("");
   const [birthDate, setBirthDate] = useState();
   const [about, setAbout] = useState("");
@@ -101,8 +101,8 @@ export default function RegistrationPage() {
         native
         required
         fullWidth={true}
-          defaultValue={"Мужской"}
           onChange={(event)=>{setGender(event.target.value)}}>
+          <option value="" >Выберите гендер</option>
           <option value={"Мужской"}>Мужской</option>
           <option value={"Женский"}>Женский</option>
           <option value={"Би"}>Би</option>
@@ -118,9 +118,11 @@ export default function RegistrationPage() {
         fullWidth={true}
           defaultValue={0} // доделать валидацию с селектами и авторизацию
           onChange={(event)=>{setCity(event.target.value)}}>
+          <option value="" >Выберите город</option>
+            
             {
               cities.map((city,index)=>(
-                <option value={city.city_name}>{city.city_name}</option>
+                <option value={city.id_city}>{city.city_name}</option>
               ))
             }
           
