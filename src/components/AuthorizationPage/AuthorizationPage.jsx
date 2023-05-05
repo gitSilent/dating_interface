@@ -2,23 +2,30 @@ import React, { useState } from 'react'
 import styles from './AuthorizationPage.module.css'
 import { Box } from '@mui/material'
 import {TextField, Button, Typography} from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import sha256 from 'sha256'
+import {Navigate} from 'react-router-dom'
 
 export default function AuthorizationPage() {
   const[login, setLogin] = useState();
   const[password, setPassword] = useState();
 
+  const navigate = useNavigate();
+
   async function authorizate(){
     console.log(login + " " + password);
-
-    let response = await fetch(`http://localhost:3050/getUserByPhone/${login}`)
-    let data = await response.json()
-    console.log(data)
-    if(login == data[0].phone_number && data[0].password == sha256(password)){
-      console.log('authorized');
-    }else{
-      console.log('not authorized');
+    try{
+      let response = await fetch(`http://localhost:3050/getUserByPhone/${login} `)
+      let data = await response.json()
+      console.log(data)
+      if(login == data[0].phone_number && data[0].password == sha256(password)){
+        console.log('authorized'); 
+        navigate("/dating")
+      }else{
+        console.log('not authorized');
+      }
+    }catch(er){
+      console.log(er);
     }
   }
   return (

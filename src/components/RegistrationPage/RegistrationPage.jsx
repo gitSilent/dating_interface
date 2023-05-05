@@ -3,7 +3,7 @@ import styles from './RegistrationPage.module.css'
 import { Box } from '@mui/material'
 import {TextField, Button, Typography, Select, MenuItem, InputLabel} from '@mui/material'
 import sha256 from 'sha256'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function RegistrationPage() {
 
@@ -19,8 +19,12 @@ export default function RegistrationPage() {
 
   const [cities, setCities] = useState([]);
 
+  const [isDateInvalid, setIsDateInvaild] = useState(false);
+  const [isLoginInvalid, setIsLoginInvaild] = useState(false);
+
+  const navigate = useNavigate()
+
   async function isAlreadyRegistred(){
-    // console.log(login + " " + password);
     try{
       let response = await fetch(`http://localhost:3050/getUserByPhone/${login}`)
       let data = await response.json()
@@ -39,29 +43,46 @@ export default function RegistrationPage() {
     alert("Пользователь с таким номером уже зарегистрирован")
     return
    }else{
-    console.log('no');
-    console.log(sha256(password));
+      let fullAge = (((new Date() - new Date(birthDate))  - (Math.floor((new Date().getUTCFullYear() - new Date(birthDate).getUTCFullYear()) / 4) * 24 *60* 60 * 1000) ) / (60000 *  60 * 24 * 365 ));
+      console.log(sha256(password));
 
-    let response = await fetch('http://localhost:3050/registrate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify({
-        login,
-        password:sha256(password),
-        name,
-        gender,
-        city,
-        birthDate,
-        about,
-        height,
-        weight
-      })
-    });
+      if(fullAge >= 18){
+        let response = await fetch('http://localhost:3050/registrate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify({
+            login,
+            password:sha256(password),
+            name,
+            gender,
+            city,
+            birthDate,
+            about,
+            height,
+            weight
+          })
+        });
+        
+        navigate("/authorization")
+
+      }else{
+        alert('Проверьте правильность заполнения полей')
+      }
    }
   }
 
+  function checkDate(){
+    let fullAge = (((new Date() - new Date(birthDate))  - (Math.floor((new Date().getUTCFullYear() - new Date(birthDate).getUTCFullYear()) / 4) * 24 *60* 60 * 1000) ) / (60000 *  60 * 24 * 365 ));
+    return  fullAge >= 18 ? setIsDateInvaild(false) : setIsDateInvaild(true)
+  }
+
+  function checkLogin(){
+    console.log(login);
+    console.log(login.match(/(?:\+|\d)[\d\-\(\) ]{9,}\d/g));
+    return login.match(/(?:\+|\d)[\d\-\(\) ]{9,}\d/g) != null && login.length === 11 ? setIsLoginInvaild(false) : setIsLoginInvaild(true)
+  } 
 
   useEffect(()=>{
     fetch('http://localhost:3050/getCities')
@@ -91,7 +112,9 @@ export default function RegistrationPage() {
           boxShadow={'5px 5px 10px #ccc'}
         >
         <h2>Регистрация</h2>
-        <TextField required maxlength="11" onChange={(e)=>{setLogin(e.target.value)}} type='phone' fullWidth={true} margin='normal' label="Номер телефона" variant="outlined" placeholder='Введите номер телефона...'/>
+        <TextField required onChange={(e)=>{
+          setLogin(e.target.value)
+          }} onBlur={checkLogin} error={isLoginInvalid} type='phone' fullWidth={true} margin='normal' label="Номер телефона" variant="outlined" placeholder='Введите номер телефона...'/>
         <TextField required onChange={(e)=>{setPassword(e.target.value)}} fullWidth={true} type='password' margin='normal' label="Пароль" variant="outlined" placeholder='Придумайте пароль...'/>
         <TextField required onChange={(e)=>{setName(e.target.value)}} fullWidth={true} margin='normal' label="Как вас зовут?" variant="outlined" placeholder='Придумайте пароль...'/>
         {/* <TextField onChange={(e)=>{setGender(e.target.value)}} fullWidth={true} margin='normal' label="Пароль" variant="outlined" placeholder='Придумайте пароль...'/>
@@ -127,7 +150,9 @@ export default function RegistrationPage() {
             }
           
         </Select>
-        <TextField required onChange={(e)=>{setBirthDate(e.target.value)}} type='date' fullWidth={true} margin='normal' variant="outlined" placeholder='Придумайте пароль...'/>
+        <TextField required onChange={(e)=>{
+          setBirthDate(e.target.value)
+          }} onBlur={checkDate} type='date' fullWidth={true} error ={isDateInvalid} margin='normal' variant="outlined" defaultValue="Дата рождения" helperText="Сервис доступен лицам старше 18 лет" placeholder='Придумайте пароль...'/>
         <TextField onChange={(e)=>{setAbout(e.target.value)}} fullWidth={true} margin='normal' label="Кратко о себе" variant="outlined" placeholder='Придумайте пароль...'/>
         <TextField required type='number' InputProps={{ inputProps: { min: 135, max: 230 } }} onChange={(e)=>{setHeight(e.target.value)}} fullWidth={true} margin='normal' label="Ваш рост" variant="outlined" placeholder='Придумайте пароль...'/>
         <TextField required type='number' InputProps={{ inputProps: { min: 35, max: 250 } }} onChange={(e)=>{setWeight(e.target.value)}} fullWidth={true} margin='normal' label="Ваш вес" variant="outlined" placeholder='Придумайте пароль...'/>
