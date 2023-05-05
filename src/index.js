@@ -6,6 +6,9 @@ import AuthorizationPage from './components/AuthorizationPage/AuthorizationPage'
 import RegistrationPage from './components/RegistrationPage/RegistrationPage';
 import MainPage from './components/MainPage/MainPage';
 import DatingPage from './components/DatingPage/DatingPage';
+import ProfilePage from './components/ProfilePage/ProfilePage';
+import SympathiesPage from './components/SympathiesPage/SympathiesPage';
+import MessagesPage from './components/MessagesPage/MessagesPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import './fonts/Inter/Inter-Regular.otf'
@@ -28,6 +31,21 @@ const router = createBrowserRouter([
   {
     path: "/dating",
     element: <DatingPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/profile",
+    element: <ProfilePage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/sympathies",
+    element: <SympathiesPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/messages",
+    element: <MessagesPage />,
     errorElement: <ErrorPage />,
   },
 ]);

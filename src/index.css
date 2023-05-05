@@ -30,7 +30,7 @@ body{
     font-family: "InterMedium" ;
     margin: 0;
 }
-p,h1,h2,h3,h4,ul{
+p,h1,h2,h3,h4,ul,hr{
     margin: 0;
     padding: 0;
 }

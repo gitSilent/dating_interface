@@ -22,13 +22,13 @@ export default function LeftMenu() {
                 <Link to={'/'} className={styles.liLink}>Главная</Link>
               </li>
               <li>
-                <Link to={'/'} className={styles.liLink}>Профиль</Link>
+                <Link to={'/profile'} className={styles.liLink}>Профиль</Link>
               </li>
               <li>
-                <Link to={'/'} className={styles.liLink}>Симпатии</Link>
+                <Link to={'/sympathies'} className={styles.liLink}>Симпатии</Link>
               </li>
               <li>
-                <Link to={'/'} className={styles.liLink}>Сообщения</Link>
+                <Link to={'/messages'} className={styles.liLink}>Сообщения</Link>
               </li>
             </ul>
         </div>
