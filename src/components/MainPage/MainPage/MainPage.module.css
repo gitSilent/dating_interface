@@ -1,0 +1,152 @@
+.mainPage {
+  font-family: "InterSemiBold";
+  color: white;
+}
+
+.aut_reg {
+  display: flex;
+  margin-top: 25px;
+  margin-bottom: 96px;
+}
+
+.center_div {
+  /* margin-left: auto; */
+
+  margin-top: 30px;
+  margin-left: 440px;
+}
+
+.center_content {
+  display: flex;
+}
+.logo {
+}
+.tagline_span {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 96px;
+  line-height: 116px;
+  color: black;
+}
+
+.tagline_reg_div {
+  margin-left: 25px;
+}
+
+.tagline_div {
+  display: grid;
+  margin-bottom: 35px;
+}
+
+.reg_button {
+  width: 541px;
+  height: 90px;
+
+  background: linear-gradient(90deg, #fbb604 0%, #ff7a00 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 44px;
+  color: #ffffff;
+
+  user-select: none;
+}
+
+.reg_button:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  transform: scale(1.02);
+}
+
+.aut_div {
+  margin-left: auto;
+  margin-right: 25px;
+
+  user-select: none;
+}
+
+.aut_button:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  transform: scale(1.02);
+}
+
+.aut_button {
+  width: 162px;
+  height: 55px;
+
+  background: linear-gradient(90deg, #efae08 0%, #ff7a00 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+  color: #ffffff;
+}
+
+.disc_content {
+  height: 435px;
+  width: auto;
+  background: url(../../images/main_pare.jpg);
+  padding-top: 213px;
+}
+
+.disc_span_div {
+  width: 981px;
+  margin-left: 440px;
+}
+.disc_p {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 96px;
+  line-height: 116px;
+}
+.disc_span {
+  color: #fe7d00;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 7px;
+}
+
+.footer_content {
+  margin-top: 29px;
+  margin-left: 385px;
+  margin-right: 380px;
+}
+
+.text_span {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.rights_div {
+  float: right;
+  margin-top: 19px;
+}
+
+.rights_span {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #4f4f4f;
+}
