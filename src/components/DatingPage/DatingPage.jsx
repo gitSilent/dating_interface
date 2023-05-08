@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import LeftMenu from '../LeftMenu/LeftMenu'
 import styles from './DatingPage.module.css'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function DatingPage() {
+  const navigate = useNavigate();
+
   function skipProfile(){
     console.log("skip");
   }
@@ -15,6 +19,20 @@ export default function DatingPage() {
   function likeProfile(){
     console.log("like");
   }
+
+  useEffect(()=>{
+    let localLogin = localStorage.getItem('login')
+    let localPassword = localStorage.getItem('password')
+
+    axios.get(`http://localhost:3050/getUserByPhone/${localLogin}`)
+    .then((resp)=>{
+      console.log(resp);
+      if(resp.status === 204){
+        navigate('/authorization')
+      }
+    })
+
+  },[])
 
   return (
     <div className={styles.datingPage}>

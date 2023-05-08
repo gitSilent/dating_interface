@@ -30,6 +30,12 @@ export default function LeftMenu() {
               <li>
                 <Link to={'/messages'} className={styles.liLink}>Сообщения</Link>
               </li>
+              <li>
+                <Link to={'/'} onClick={()=>{
+                  localStorage.removeItem('login')
+                  localStorage.removeItem('password')
+                }} className={styles.liLink}>Выйти</Link>
+              </li>
             </ul>
         </div>
       </div>

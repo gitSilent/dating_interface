@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './AuthorizationPage.module.css'
 import { Box } from '@mui/material'
 import {TextField, Button, Typography} from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom'
 import sha256 from 'sha256'
 import {Navigate} from 'react-router-dom'
+import axios from 'axios'
 
 export default function AuthorizationPage() {
   const[login, setLogin] = useState();
@@ -14,21 +15,54 @@ export default function AuthorizationPage() {
 
   async function authorizate(){
     console.log(login + " " + password);
-    try{
-      let response = await fetch(`http://localhost:3050/getUserByPhone/${login} `)
-      let data = await response.json()
-      console.log(data)
-      if(login == data[0].phone_number && data[0].password == sha256(password)){
-        console.log('authorized'); 
+
+    axios.get(`http://localhost:3050/getUserByPhone/${login}`)
+    .then((resp)=>{
+      console.log(resp);
+      if(resp.status === 200 && login == resp.data[0].phone_number && resp.data[0].password == sha256(password)){
+        localStorage.setItem("login", login)
+        localStorage.setItem("password", sha256(password))
         navigate("/dating")
-      }else{
-        alert("Проверьте правильность заполнения полей!")
+      }else if(resp.status === 200 && login == resp.data[0].phone_number && resp.data[0].password != sha256(password)){
+        alert("Неверный пароль!")
       }
-    }catch(er){
-      alert("Проверьте правильность заполнения полей!")
-      console.log(er);
-    }
+      else if(resp.status === 204){
+          alert("Проверьте правильность заполнения полей!")
+        }
+    })
+
+    // try{
+    //   let response = await fetch(`http://localhost:3050/getUserByPhone/${login} `)
+    //   let data = await response.json()
+    //   console.log(data)
+    //   if(login == data[0].phone_number && data[0].password == sha256(password)){
+    //     // console.log('authorized'); 
+    //     localStorage.setItem("login", login)
+    //     localStorage.setItem("password", sha256(password))
+    //     navigate("/dating")
+    //   }else{
+    //     alert("Проверьте правильность заполнения полей!")
+    //   }
+    // }catch(er){
+    //   alert("Проверьте правильность заполнения полей!")
+    //   console.log(er);
+    // }
   }
+
+  useEffect(()=>{
+    let localLogin = localStorage.getItem('login')
+    let localPassword = localStorage.getItem('password')
+
+    axios.get(`http://localhost:3050/getUserByPhone/${localLogin}`)
+    .then((resp)=>{
+      console.log(resp);
+      if(resp.status === 200 && localLogin == resp.data[0].phone_number && resp.data[0].password == localPassword){
+        navigate('/dating')
+      }
+    })
+
+  },[])
+
   return (
     <div className={styles.authorizationPage}>
     <img src={require("../../images/logo.svg").default} alt="" className={"logoLink"} onClick={()=>{navigate("/")}} />

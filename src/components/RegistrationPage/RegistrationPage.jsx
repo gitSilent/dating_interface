@@ -4,6 +4,7 @@ import { Box } from '@mui/material'
 import {TextField, Button, Typography, Select, MenuItem, InputLabel} from '@mui/material'
 import sha256 from 'sha256'
 import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 export default function RegistrationPage() {
 
@@ -25,48 +26,48 @@ export default function RegistrationPage() {
   const navigate = useNavigate()
 
   async function isAlreadyRegistred(){
-    try{
-      let response = await fetch(`http://localhost:3050/getUserByPhone/${login}`)
-      let data = await response.json()
-      console.log(data)
-      return data.length > 0 ? true : false 
-    }catch(er){
-      console.log(er);
-      return false
-    }
+
+    return axios.get(`http://localhost:3050/getUserByPhone/${login}`)
+    .then((resp)=>{
+      // console.log(resp);
+      // console.log(resp.data.length);
+      // console.log(resp.data.length > 0 && resp.status === 200);
+      return resp.data.length > 0 && resp.status === 200 ? true : false 
+    })
 
   }
 
   async function registrate(){
    if (await isAlreadyRegistred()){
-    console.log('already registred')
     alert("Пользователь с таким номером уже зарегистрирован")
     return
    }else{
       let fullAge = (((new Date() - new Date(birthDate))  - (Math.floor((new Date().getUTCFullYear() - new Date(birthDate).getUTCFullYear()) / 4) * 24 *60* 60 * 1000) ) / (60000 *  60 * 24 * 365 ));
-      console.log(sha256(password));
 
-      if(fullAge >= 18){
-        let response = await fetch('http://localhost:3050/registrate', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify({
-            login,
-            password:sha256(password),
-            name,
-            gender,
-            city,
-            birthDate,
-            about,
-            height,
-            weight
-          })
-        });
-        alert("Вы успешно зарегистрировались!")
-        navigate("/authorization")
+      if(fullAge >= 18 && !isLoginInvalid){
 
+        axios.post('http://localhost:3050/registrate',
+        JSON.stringify({
+              login,
+              password:sha256(password),
+              name,
+              gender,
+              city,
+              birthDate,
+              about,
+              height,
+              weight
+            }),
+            {
+              headers:{
+                'Content-Type': 'application/json;charset=utf-8'
+              }
+            }
+        ).then((resp)=>{
+          // console.log(resp);
+          alert("Вы успешно зарегистрировались!")
+          navigate("/authorization")
+        })
       }else{
         alert('Проверьте правильность заполнения полей')
       }
@@ -79,17 +80,27 @@ export default function RegistrationPage() {
   }
 
   function checkLogin(){
-    console.log(login);
-    console.log(login.match(/(?:\+|\d)[\d\-\(\) ]{9,}\d/g));
     return login.match(/79\d\d\d\d\d\d\d\d\d/) != null && login.length === 11 ? setIsLoginInvaild(false) : setIsLoginInvaild(true)
   } 
 
   useEffect(()=>{
-    fetch('http://localhost:3050/getCities')
-    .then(response => response.json())
-    .then((data)=>{
-      // console.log(data.result);
-      setCities(data.result)
+    let localLogin = localStorage.getItem('login')
+    let localPassword = localStorage.getItem('password')
+
+    axios.get(`http://localhost:3050/getUserByPhone/${localLogin}`)
+    .then((resp)=>{
+      console.log(resp);
+      if(resp.status === 200 && localLogin == resp.data[0].phone_number && resp.data[0].password == localPassword){
+        navigate('/dating')
+      }
+    })
+
+  },[])
+  
+  useEffect(()=>{
+    axios.get('http://localhost:3050/getCities')
+    .then((resp)=>{
+      setCities(resp.data.result)
     })
   },[])
 
