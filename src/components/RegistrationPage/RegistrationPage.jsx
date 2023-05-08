@@ -88,7 +88,7 @@ export default function RegistrationPage() {
     fetch('http://localhost:3050/getCities')
     .then(response => response.json())
     .then((data)=>{
-      console.log(data.result);
+      // console.log(data.result);
       setCities(data.result)
     })
   },[])

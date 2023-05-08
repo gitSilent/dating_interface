@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./MainPage.module.css";
+import styles from "./MainPage1.module.css";
 import { Link } from "react-router-dom";
 
 export default function MainPage() {
