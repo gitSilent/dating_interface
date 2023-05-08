@@ -22,16 +22,17 @@ export default function AuthorizationPage() {
         console.log('authorized'); 
         navigate("/dating")
       }else{
-        console.log('not authorized');
+        alert("Проверьте правильность заполнения полей!")
       }
     }catch(er){
+      alert("Проверьте правильность заполнения полей!")
       console.log(er);
     }
   }
   return (
     <div className={styles.authorizationPage}>
-      
-      <form className='form' onSubmit={(e)=>{
+    <img src={require("../../images/logo.svg").default} alt="" className={"logoLink"} onClick={()=>{navigate("/")}} />
+      <form className={styles.form} onSubmit={(e)=>{
         e.preventDefault()
         authorizate();
         }}>

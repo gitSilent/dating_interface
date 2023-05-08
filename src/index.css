@@ -34,6 +34,15 @@ p,h1,h2,h3,h4,ul,hr{
     margin: 0;
     padding: 0;
 }
+.logoLink{
+    width: 100px;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+.logoLink:hover{
+    cursor: pointer;
+}
 /* a{
     text-decoration: none;
 } */

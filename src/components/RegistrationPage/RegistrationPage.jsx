@@ -64,7 +64,7 @@ export default function RegistrationPage() {
             weight
           })
         });
-        
+        alert("Вы успешно зарегистрировались!")
         navigate("/authorization")
 
       }else{
@@ -81,7 +81,7 @@ export default function RegistrationPage() {
   function checkLogin(){
     console.log(login);
     console.log(login.match(/(?:\+|\d)[\d\-\(\) ]{9,}\d/g));
-    return login.match(/(?:\+|\d)[\d\-\(\) ]{9,}\d/g) != null && login.length === 11 ? setIsLoginInvaild(false) : setIsLoginInvaild(true)
+    return login.match(/79\d\d\d\d\d\d\d\d\d/) != null && login.length === 11 ? setIsLoginInvaild(false) : setIsLoginInvaild(true)
   } 
 
   useEffect(()=>{
@@ -96,7 +96,8 @@ export default function RegistrationPage() {
 
   return (
     <div className={styles.registrationPage}>
-      <form className='form' onSubmit={(e)=>{
+      <img src={require("../../images/logo.svg").default} alt="" className={"logoLink"} onClick={()=>{navigate("/")}}/>
+      <form className={styles.form} onSubmit={(e)=>{
         e.preventDefault()
         registrate();
         }}>
@@ -116,9 +117,7 @@ export default function RegistrationPage() {
           setLogin(e.target.value)
           }} onBlur={checkLogin} error={isLoginInvalid} type='phone' fullWidth={true} margin='normal' label="Номер телефона" variant="outlined" placeholder='Введите номер телефона...'/>
         <TextField required onChange={(e)=>{setPassword(e.target.value)}} fullWidth={true} type='password' margin='normal' label="Пароль" variant="outlined" placeholder='Придумайте пароль...'/>
-        <TextField required onChange={(e)=>{setName(e.target.value)}} fullWidth={true} margin='normal' label="Как вас зовут?" variant="outlined" placeholder='Придумайте пароль...'/>
-        {/* <TextField onChange={(e)=>{setGender(e.target.value)}} fullWidth={true} margin='normal' label="Пароль" variant="outlined" placeholder='Придумайте пароль...'/>
-        <TextField onChange={(e)=>{setCity(e.target.value)}} fullWidth={true} margin='normal' label="Пароль" variant="outlined" placeholder='Придумайте пароль...'/> */}
+        <TextField required onChange={(e)=>{setName(e.target.value)}} fullWidth={true} margin='normal' label="Как вас зовут?" variant="outlined"/>
         <InputLabel>Гендер</InputLabel>
         <Select 
         native
@@ -152,10 +151,10 @@ export default function RegistrationPage() {
         </Select>
         <TextField required onChange={(e)=>{
           setBirthDate(e.target.value)
-          }} onBlur={checkDate} type='date' fullWidth={true} error ={isDateInvalid} margin='normal' variant="outlined" defaultValue="Дата рождения" helperText="Сервис доступен лицам старше 18 лет" placeholder='Придумайте пароль...'/>
-        <TextField onChange={(e)=>{setAbout(e.target.value)}} fullWidth={true} margin='normal' label="Кратко о себе" variant="outlined" placeholder='Придумайте пароль...'/>
-        <TextField required type='number' InputProps={{ inputProps: { min: 135, max: 230 } }} onChange={(e)=>{setHeight(e.target.value)}} fullWidth={true} margin='normal' label="Ваш рост" variant="outlined" placeholder='Придумайте пароль...'/>
-        <TextField required type='number' InputProps={{ inputProps: { min: 35, max: 250 } }} onChange={(e)=>{setWeight(e.target.value)}} fullWidth={true} margin='normal' label="Ваш вес" variant="outlined" placeholder='Придумайте пароль...'/>
+          }} onBlur={checkDate} type='date' fullWidth={true} error ={isDateInvalid} margin='normal' variant="outlined" defaultValue="Дата рождения" helperText="Сервис доступен лицам старше 18 лет"/>
+        <TextField onChange={(e)=>{setAbout(e.target.value)}} fullWidth={true} margin='normal' label="Кратко о себе" variant="outlined"/>
+        <TextField required type='number' InputProps={{ inputProps: { min: 135, max: 230 } }} onChange={(e)=>{setHeight(e.target.value)}} fullWidth={true} margin='normal' label="Ваш рост" variant="outlined"/>
+        <TextField required type='number' InputProps={{ inputProps: { min: 35, max: 250 } }} onChange={(e)=>{setWeight(e.target.value)}} fullWidth={true} margin='normal' label="Ваш вес" variant="outlined"/>
         <Button type='submit' sx={{fontFamily:'InterSemiBold',textTransform: 'none', fontSize:'22px', fontStyle:'normal', backgroundColor:'black', padding:'5px 204px 5px 204px', marginTop:'10px', maxWidth:'485px'}} margin='normal' variant="contained">Зарегистрироваться</Button>
         <Typography variant="body1" sx={{fontFamily: 'InterSemiBold',textTransform: 'none', marginTop:'15px' }}> Уже есть аккаунт? <Link to={'/authorization'} className={styles.linkAuth}>Авторизация</Link></Typography>
         </Box>

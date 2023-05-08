@@ -1,7 +1,11 @@
+/* .form{
+    margin-top: 150px;
+} */
 .registrationPage h2{
     font-family: 'InterSemiBold';
     font-size: 48px;
 }
+
 .linkAuth{
     color: rgb(0, 0, 0);
 }
