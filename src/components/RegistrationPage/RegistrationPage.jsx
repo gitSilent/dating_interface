@@ -17,6 +17,7 @@ export default function RegistrationPage() {
   const [about, setAbout] = useState("");
   const [height, setHeight] = useState();
   const [weight, setWeight] = useState();
+  const [image, setImage] = useState("");
 
   const [cities, setCities] = useState([]);
 
@@ -45,28 +46,44 @@ export default function RegistrationPage() {
       let fullAge = (((new Date() - new Date(birthDate))  - (Math.floor((new Date().getUTCFullYear() - new Date(birthDate).getUTCFullYear()) / 4) * 24 *60* 60 * 1000) ) / (60000 *  60 * 24 * 365 ));
 
       if(fullAge >= 18 && !isLoginInvalid){
+        
+        const form = new FormData();
+        form.append('login', login);   
+        form.append('password', sha256(password));   
+        form.append('name', name);   
+        form.append('gender', gender);   
+        form.append('city', city);   
+        form.append('birthDate', birthDate);   
+        form.append('about', about);   
+        form.append('height', height);   
+        form.append('weight', weight);   
+        form.append('image', image);   
+
 
         axios.post('http://localhost:3050/registrate',
-        JSON.stringify({
-              login,
-              password:sha256(password),
-              name,
-              gender,
-              city,
-              birthDate,
-              about,
-              height,
-              weight
-            }),
+        // JSON.stringify({
+        //       login,
+        //       password:sha256(password),
+        //       name,
+        //       gender,
+        //       city,
+        //       birthDate,
+        //       about,
+        //       height,
+        //       weight
+        //     }),
+          form,
             {
               headers:{
-                'Content-Type': 'application/json;charset=utf-8'
+                'Content-Type': "multipart/form-data"
               }
             }
         ).then((resp)=>{
           // console.log(resp);
-          alert("Вы успешно зарегистрировались!")
-          navigate("/authorization")
+          if(resp.status === 200){
+            alert("Вы успешно зарегистрировались!")
+            navigate("/authorization")
+          }
         })
       }else{
         alert('Проверьте правильность заполнения полей')
@@ -104,6 +121,17 @@ export default function RegistrationPage() {
     })
   },[])
 
+  // useEffect(()=>{                                    ДОБАВЛЕНИЕ НОВОЙ ФОТОГРАФИИ ДЛЯ ПРОФИЛЯ !!!!!!!!!!!!!!!!
+  //   console.log(image);
+    // axios.post(`http://localhost:3050/sendPhoto`, {image: image}, {
+    //   headers: {
+    //     'Content-Type': "multipart/form-data"
+    //   }
+    // })
+    // .then((resp)=>{
+    // })
+  // },[image])
+
 
   return (
     <div className={styles.registrationPage}>
@@ -129,19 +157,15 @@ export default function RegistrationPage() {
           }} onBlur={checkLogin} error={isLoginInvalid} type='phone' fullWidth={true} margin='normal' label="Номер телефона" variant="outlined" placeholder='Введите номер телефона...'/>
         <TextField required onChange={(e)=>{setPassword(e.target.value)}} fullWidth={true} type='password' margin='normal' label="Пароль" variant="outlined" placeholder='Придумайте пароль...'/>
         <TextField required onChange={(e)=>{setName(e.target.value)}} fullWidth={true} margin='normal' label="Как вас зовут?" variant="outlined"/>
-        <InputLabel>Гендер</InputLabel>
+        <InputLabel>Пол</InputLabel>
         <Select 
         native
         required
         fullWidth={true}
           onChange={(event)=>{setGender(event.target.value)}}>
-          <option value="" >Выберите гендер</option>
+          <option value="" >Выберите пол</option>
           <option value={"Мужской"}>Мужской</option>
           <option value={"Женский"}>Женский</option>
-          <option value={"Би"}>Би</option>
-          <option value={"MtF"}>MtF</option>
-          <option value={"FtM"}>FtM</option>
-          <option value={"Другой"}>Другой</option>
         </Select>
 
         <InputLabel>Город</InputLabel>
@@ -166,6 +190,8 @@ export default function RegistrationPage() {
         <TextField onChange={(e)=>{setAbout(e.target.value)}} fullWidth={true} margin='normal' label="Кратко о себе" variant="outlined"/>
         <TextField required type='number' InputProps={{ inputProps: { min: 135, max: 230 } }} onChange={(e)=>{setHeight(e.target.value)}} fullWidth={true} margin='normal' label="Ваш рост" variant="outlined"/>
         <TextField required type='number' InputProps={{ inputProps: { min: 35, max: 250 } }} onChange={(e)=>{setWeight(e.target.value)}} fullWidth={true} margin='normal' label="Ваш вес" variant="outlined"/>
+        <InputLabel>Загрузите Ваше фото</InputLabel>
+        <TextField required type='file' InputProps={{ inputProps: { accept:".jpg,.jpeg,.png" } }}   onChange={(e)=>{setImage(e.target.files[0])}} fullWidth={true} margin='normal' variant="outlined"/>
         <Button type='submit' sx={{fontFamily:'InterSemiBold',textTransform: 'none', fontSize:'22px', fontStyle:'normal', backgroundColor:'black', padding:'5px 204px 5px 204px', marginTop:'10px', maxWidth:'485px'}} margin='normal' variant="contained">Зарегистрироваться</Button>
         <Typography variant="body1" sx={{fontFamily: 'InterSemiBold',textTransform: 'none', marginTop:'15px' }}> Уже есть аккаунт? <Link to={'/authorization'} className={styles.linkAuth}>Авторизация</Link></Typography>
         </Box>

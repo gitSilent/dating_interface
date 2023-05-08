@@ -58,6 +58,9 @@ export default function AuthorizationPage() {
       console.log(resp);
       if(resp.status === 200 && localLogin == resp.data[0].phone_number && resp.data[0].password == localPassword){
         navigate('/dating')
+      }else{
+        localStorage.removeItem('login')
+        localStorage.removeItem('password')
       }
     })
 
