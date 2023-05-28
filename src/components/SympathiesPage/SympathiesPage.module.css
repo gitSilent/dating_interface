@@ -1,0 +1,42 @@
+.symp_page {
+  display: grid;
+  justify-content: center;
+}
+.symp_div {
+  width: 1160px;
+  margin: 0 auto;
+}
+.header {
+  padding-top: 38px;
+}
+.header_text {
+  font-family: Inter;
+  font-style: Bold;
+  font-size: 64px;
+}
+.symp_main {
+  margin-top: 59px;
+}
+.symp_li {
+  height: 145px;
+}
+/* .symp_li:hover {
+  transition: 0.2s;
+  -webkit-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  transform: scale(1.01);
+} */
+.symp_li:not(:last-child) {
+  margin-bottom: 59px;
+}
+.empty_div {
+  height: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.empty_text {
+  font-family: Inter;
+  font-size: 48px;
+  opacity: 0.8;
+}

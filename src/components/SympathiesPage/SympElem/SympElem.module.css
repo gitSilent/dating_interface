@@ -1,0 +1,63 @@
+.symp_elem {
+  background-color: #575757;
+  display: flex;
+  padding: 14px 30px 14px 30px;
+  border-radius: 10px;
+}
+.symp_elem_content {
+  display: flex;
+  align-items: center;
+}
+.text {
+  color: white;
+  font-family: "InterRegular";
+  font-size: 32px;
+}
+.div_img {
+  margin-right: 41px;
+}
+.img {
+  border-radius: 100%;
+  user-select: none;
+}
+.div_event {
+  margin-left: auto;
+  display: grid;
+}
+.div_cross {
+  margin-left: auto;
+}
+.cross {
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  filter: brightness(70%);
+  user-select: none;
+}
+.cross:hover {
+  transition: 0.3s;
+  filter: brightness(100%);
+  transition: 0.3s;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+.div_mes {
+  display: flex;
+  align-items: center;
+}
+.mes {
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  filter: brightness(70%);
+  user-select: none;
+}
+.mes:hover {
+  transition: 0.3s;
+  filter: brightness(100%);
+  transition: 0.3s;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
