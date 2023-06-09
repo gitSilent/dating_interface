@@ -49,6 +49,16 @@ export default function DatingPage() {
   }
   function likeProfile(){
     console.log("like");
+
+    axios.post(`http://localhost:3050/addSympathy`, { //поиск следующего доступного профиля в базе
+      
+        id_sender: userInfo.id_user,
+        id_receiver: currentProfile.id_user
+      })
+    .then((resp)=>{
+        console.log(resp.data.result);
+        skipProfile()
+      })
   }
 
   useEffect(()=>{ //useEffect, который проверяет, авторизован ли пользователь, перешедший на страницу /dating, используя данные их localStorage
