@@ -35,7 +35,7 @@ export default function LeftMenu() {
         <div className={styles.selectList_div}> 
             <ul>
               <li>
-                <Link to={'/'} className={styles.liLink}>Главная</Link>
+                <Link to={'/dating'} className={styles.liLink}>Главная</Link>
               </li>
               <li>
                 <Link to={'/profile'} className={styles.liLink}>Профиль</Link>
