@@ -15,7 +15,7 @@ import './fonts/Inter/Inter-Regular.otf'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <DatingPage />,
+    element: <MainPage />,
     errorElement: <ErrorPage />,
   },
   {

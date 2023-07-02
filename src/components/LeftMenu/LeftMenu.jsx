@@ -1,11 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './LeftMenu.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios';
 
 export default function LeftMenu() {
 
   const [isVisible, setIsVisible] = useState(false);
 
+  const [userInfo, setUserInfo] = useState({})
+
+  const navigate = useNavigate();
+
+  
+
+  useEffect(()=>{
+    let localLogin = localStorage.getItem('login')
+
+    axios.get(`http://localhost:3050/getUserByPhone/${localLogin}`)
+    .then((resp)=>{
+      setUserInfo(resp.data[0])
+
+    })
+  },[])
   if(isVisible){
     return (
       <div className={styles.leftMenu}>
@@ -13,8 +29,8 @@ export default function LeftMenu() {
         
         <div className={styles.userProfile}>
           <img src={require("../../images/profile_photo.jpg")} alt="" className={styles.profilePhoto} />
-          <span>Алина</span>
-          <span>Сухачева</span>
+          <span className={styles.userName}>{userInfo.user_name}</span>
+          {/* <span>Сухачева</span> */}
         </div>
         <div className={styles.selectList_div}> 
             <ul>
@@ -36,6 +52,7 @@ export default function LeftMenu() {
                   localStorage.removeItem('id')
                   localStorage.removeItem('login')
                   localStorage.removeItem('password')
+
                 }} className={styles.liLink}>Выйти</Link>
               </li>
             </ul>
